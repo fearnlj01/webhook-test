@@ -1,0 +1,31 @@
+name: Webhook on push
+
+on:
+  push:
+    branches:
+        - master
+
+jobs:
+  webhook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send a webhook to discord
+        run: |
+          RESPONSE=$(curl -H "Content-Type: application/json" -X POST -d '{
+            "content": "",
+            "embeds": [
+              {
+                "description": "**Version**:`4.2.2.0-dev-abcdefg`\n\nUpdate by grabbing the latest daily from [our site](https://www.shokoanime.com/downloads/shoko-server), or through Docker using the `shokoanime/server:daily` tag!\n\n**Changes since last build**:\nCommit Message A\nCommit Message B\nCommit Message C\nCommit Message D",
+                "color": 3581776,
+                "author": {
+                  "name": "Shoko Server | New Daily Build",
+                  "url": "https://github.com/ShokoAnime/ShokoServer",
+                  "icon_url": "https://fearnlj01.co.uk/images/shoko_1024.png"
+                },
+                "timestamp": "2024-04-17T20:35:00.000Z"
+              }
+            ],
+            "username": "Shoko Ai",
+            "avatar_url": "https://fearnlj01.co.uk/images/shoko_1024.png",
+          }' ${{ secrets.WEBHOOK_URL }})
+          echo "Webhook server response: $RESPONSE"
