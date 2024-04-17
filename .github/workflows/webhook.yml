@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Get datetime
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%dT%H:%M:%S')"
+        run: echo "date=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_OUTPUT
       - name: Shoko Server Webhook
         uses: tsickert/discord-webhook@v6.0.0
         with:
