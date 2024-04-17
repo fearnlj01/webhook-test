@@ -31,6 +31,26 @@ jobs:
             Commit Message B
             Commit Message C
             Commit Message D
+      - name: Shoko Server Webhook (Alternative)
+        uses: tsickert/discord-webhook@v6.0.0
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_URL }}
+          embed-color: 5809492
+          embed-timestamp: ${{ steps.date.outputs.date }}
+          embed-author-name: Shoko Server
+          embed-author-icon-url: https://raw.githubusercontent.com/${{ github.repository }}/master/.github/images/shoko.png
+          embed-author-url: https://github.com/ShokoAnime/ShokoServer
+          embed-title: New Daily Build
+          embed-description: |
+            **Version**:`4.2.2.0-dev-abcdefg`
+
+            Update by grabbing the latest daily from [our site](https://www.shokoanime.com/downloads/shoko-server), or through Docker using the `shokoanime/server:daily` tag!
+
+            **Changes since last build**:
+            Commit Message A
+            Commit Message B
+            Commit Message C
+            Commit Message D
       - name: Shokofin Webhook
         uses: tsickert/discord-webhook@v6.0.0
         with:
