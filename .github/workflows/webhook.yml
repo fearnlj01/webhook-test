@@ -16,8 +16,6 @@ jobs:
         uses: tsickert/discord-webhook@v6.0.0
         with:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
-          username: Shoko Ai
-          avatar-url: https://fearnlj01.co.uk/images/Shoko_1024.png
           embed-color: 5809492
           embed-timestamp: ${{ steps.date.outputs.date }}
           embed-author-name: Shoko Server | New Daily Build
@@ -37,12 +35,10 @@ jobs:
         uses: tsickert/discord-webhook@v6.0.0
         with:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
-          username: Shoko Ai
-          avatar-url: https://fearnlj01.co.uk/images/Shoko_1024.png
           embed-color: 9985983
           embed-timestamp: ${{ steps.date.outputs.date }}
           embed-author-name: Shokofin | New Unstable Build
-          embed-author-icon-url: https://fearnlj01.co.uk/images/Autobrr_1024.png
+          embed-author-icon-url: https://fearnlj01.co.uk/images/dark_jelly.png
           embed-author-url: https://github.com/ShokoAnime/Shokofin
           embed-description: |
             **Version**:`3.0.1.131` (`abcdefg`)
@@ -58,12 +54,10 @@ jobs:
         uses: tsickert/discord-webhook@v6.0.0
         with:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
-          username: Shoko Ai
-          avatar-url: https://fearnlj01.co.uk/images/Shoko_1024.png
           embed-color: 7641851
           embed-timestamp: ${{ steps.date.outputs.date }}
           embed-author-name: Web UI | New Daily Build
-          embed-author-icon-url: https://fearnlj01.co.uk/images/shokoserver.png
+          embed-author-icon-url: https://fearnlj01.co.uk/images/autobrr_1024.png
           embed-author-url: https://github.com/ShokoAnime/ShokoServer-WebUI
           embed-description: |
             **Version**:`2.1.0-dev.122`
