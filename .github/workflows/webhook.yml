@@ -26,6 +26,6 @@ jobs:
               }
             ],
             "username": "Shoko Ai",
-            "avatar_url": "https://fearnlj01.co.uk/images/shoko_1024.png",
+            "avatar_url": "https://fearnlj01.co.uk/images/shoko_1024.png"
           }' ${{ secrets.WEBHOOK_URL }})
           echo "Webhook server response: $RESPONSE"
