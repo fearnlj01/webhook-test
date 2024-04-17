@@ -6,41 +6,45 @@ on:
         - master
 
 jobs:
-  webhook_curl:
+  webhook_examples:
     runs-on: ubuntu-latest
     steps:
       - name: Get datetime
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%dT%H:%M:%S')"
-      - name: Send a webhook to discord
-        run: |
-          RESPONSE=$(curl -H "Content-Type: application/json" -X POST -d '{
-            "content": "",
-            "embeds": [
-              {
-                "description": "**Version**:`4.2.2.0-dev-abcdefg`\n\nUpdate by grabbing the latest daily from [our site](https://www.shokoanime.com/downloads/shoko-server), or through Docker using the `shokoanime/server:daily` tag!\n\n**Changes since last build**:\n${{ steps.generate_changelog.outputs.CHANGELOG }}",
-                "color": 3581776,
-                "author": {
-                  "name": "Shoko Server | New Daily Build",
-                  "url": "https://github.com/ShokoAnime/ShokoServer",
-                  "icon_url": "https://fearnlj01.co.uk/images/shoko_1024.png"
-                },
-                "timestamp": "2024-04-17T20:35:00.000Z"
-              }
-            ],
-            "username": "Shoko Ai",
-            "avatar_url": "https://fearnlj01.co.uk/images/shoko_1024.png"
-          }' ${{ secrets.WEBHOOK_URL }})
-          echo "Webhook server response: $RESPONSE"
-      - name: Discord Webhook Action
+      - name: Shoko Server Webhook
         uses: tsickert/discord-webhook@v6.0.0
         with:
           webhook-url: ${{ secrets.WEBHOOK_URL }}
           username: Shoko Ai
           avatar-url: https://fearnlj01.co.uk/images/Shoko_1024.png
-          embed-color: 3581776
+          embed-color: 5809492
           embed-timestamp: ${{ steps.date.outputs.date }}
           embed-author-name: Shoko Server | New Daily Build
           embed-author-icon-url: https://fearnlj01.co.uk/images/Shoko_1024.png
           embed-author-url: https://github.com/ShokoAnime/ShokoServer
           embed-description: "**Version**:`4.2.2.0-dev-abcdefg`\n\nUpdate by grabbing the latest daily from [our site](https://www.shokoanime.com/downloads/shoko-server), or through Docker using the `shokoanime/server:daily` tag!\n\n**Changes since last build**:\nCommit Message A\nCommit Message B\nCommit Message C\nCommit Message D"
+      - name: Shokofin Webhook
+        uses: tsickert/discord-webhook@v6.0.0
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_URL }}
+          username: Shoko Ai
+          avatar-url: https://fearnlj01.co.uk/images/Shoko_1024.png
+          embed-color: 9985983
+          embed-timestamp: ${{ steps.date.outputs.date }}
+          embed-author-name: Shokofin | New Unstable Build
+          embed-author-icon-url: https://fearnlj01.co.uk/images/Autobrr_1024.png
+          embed-author-url: https://github.com/ShokoAnime/Shokofin
+          embed-description: "**Version**:`3.0.1.131` (`abcdefg`)\n\nUpdate your plugin using the latest [unstable manifest](https://raw.githubusercontent.com/ShokoAnime/Shokofin/master/manifest-unstable.json) or by downloading the release from [GitHub Releases](https://github.com/ShokoAnime/Shokofin/releases/tag/3.0.1.131) and installing it manually!\n\n**Changes since last build**:\nCommit Message A\nCommit Message B\nCommit Message C\nCommit Message D"
+      - name: Web UI Webhook
+        uses: tsickert/discord-webhook@v6.0.0
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_URL }}
+          username: Shoko Ai
+          avatar-url: https://fearnlj01.co.uk/images/Shoko_1024.png
+          embed-color: 7641851
+          embed-timestamp: ${{ steps.date.outputs.date }}
+          embed-author-name: Web UI | New Daily Build
+          embed-author-icon-url: https://fearnlj01.co.uk/images/shokoserver.png
+          embed-author-url: https://github.com/ShokoAnime/ShokoServer-WebUI
+          embed-description: "**Version**:`2.1.0-dev.122`\n\nUpdate from the Web UI or click [here](https://github.com/ShokoAnime/Shoko-WebUI/releases/tag/v2.1.0-dev.122) to download!\n\n**Changes since last build**:\nCommit Message A\nCommit Message B\nCommit Message C\nCommit Message D"
