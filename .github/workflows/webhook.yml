@@ -19,7 +19,7 @@ jobs:
           embed-color: 5809492
           embed-timestamp: ${{ steps.date.outputs.date }}
           embed-author-name: Shoko Server | New Daily Build
-          embed-author-icon-url: https://fearnlj01.co.uk/images/Shoko_1024.png
+          embed-author-icon-url: https://raw.githubusercontent.com/${{ github.repository }}/master/.github/images/shoko.png
           embed-author-url: https://github.com/ShokoAnime/ShokoServer
           embed-description: |
             **Version**:`4.2.2.0-dev-abcdefg`
@@ -38,7 +38,7 @@ jobs:
           embed-color: 9985983
           embed-timestamp: ${{ steps.date.outputs.date }}
           embed-author-name: Shokofin | New Unstable Build
-          embed-author-icon-url: https://fearnlj01.co.uk/images/dark_jelly.png
+          embed-author-icon-url: https://raw.githubusercontent.com/${{ github.repository }}/master/.github/images/jellyfin.png
           embed-author-url: https://github.com/ShokoAnime/Shokofin
           embed-description: |
             **Version**:`3.0.1.131` (`abcdefg`)
@@ -57,7 +57,7 @@ jobs:
           embed-color: 7641851
           embed-timestamp: ${{ steps.date.outputs.date }}
           embed-author-name: Web UI | New Daily Build
-          embed-author-icon-url: https://fearnlj01.co.uk/images/autobrr_1024.png
+          embed-author-icon-url: https://raw.githubusercontent.com/${{ github.repository }}/master/.github/images/webui.png
           embed-author-url: https://github.com/ShokoAnime/ShokoServer-WebUI
           embed-description: |
             **Version**:`2.1.0-dev.122`
