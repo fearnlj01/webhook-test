@@ -6,16 +6,19 @@ on:
         - master
 
 jobs:
-  webhook:
+  webhook_curl:
     runs-on: ubuntu-latest
     steps:
+      - name: Get datetime
+        id: curr-date-time
+        run: echo "CURR_DATE_TIME=$(date +'%Y-%m-%dT%H:%M:%S)" >> "$GITHUB_ENV"
       - name: Send a webhook to discord
         run: |
           RESPONSE=$(curl -H "Content-Type: application/json" -X POST -d '{
             "content": "",
             "embeds": [
               {
-                "description": "**Version**:`4.2.2.0-dev-abcdefg`\n\nUpdate by grabbing the latest daily from [our site](https://www.shokoanime.com/downloads/shoko-server), or through Docker using the `shokoanime/server:daily` tag!\n\n**Changes since last build**:\nCommit Message A\nCommit Message B\nCommit Message C\nCommit Message D",
+                "description": "**Version**:`4.2.2.0-dev-abcdefg`\n\nUpdate by grabbing the latest daily from [our site](https://www.shokoanime.com/downloads/shoko-server), or through Docker using the `shokoanime/server:daily` tag!\n\n**Changes since last build**:\n${{ steps.generate_changelog.outputs.CHANGELOG }}",
                 "color": 3581776,
                 "author": {
                   "name": "Shoko Server | New Daily Build",
@@ -29,3 +32,17 @@ jobs:
             "avatar_url": "https://fearnlj01.co.uk/images/shoko_1024.png"
           }' ${{ secrets.WEBHOOK_URL }})
           echo "Webhook server response: $RESPONSE"
+      - name: Discord Webhook Action
+        uses: tsickert/discord-webhook@v6.0.0
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_URL }}
+          username: Shoko Ai
+          avatar-url: https://fearnlj01.co.uk/images/Shoko_1024.png
+          embed-color: 3581776
+          embed-timestamp: $CURR_DATE_TIME
+          embed-author-name: Shoko Server | New Daily Build
+          embed-author-icon-url: https://fearnlj01.co.uk/images/Shoko_1024.png
+          embed-author-url: https://github.com/ShokoAnime/ShokoServer
+          embed-description: "**Version**:`4.2.2.0-dev-abcdefg`\n\nUpdate by grabbing the latest daily from [our site](https://www.shokoanime.com/downloads/shoko-server), or through Docker using the `shokoanime/server:daily` tag!\n\n**Changes since last build**:\nCommit Message A\nCommit Message B\nCommit Message C\nCommit Message D"
+        env:
+          CURR_DATE_TIME: ${{ steps.curr-date-time.outputs.CURR_DATE_TIME }}
